@@ -1,47 +1,27 @@
-//
-// Created by livace on 14.03.2018.
-//
-
-#include <cassert>
-#include "testQueue.h"
+#include "gtest/gtest.h"
 #include "../containers/queue/queue.h"
-#include <string>
-#include <iostream>
-void testQueue::runTests() {
+
+TEST(TEST_QUEUE, QUEUE_INT) {
   Queue<int> int_q;
   int_q.push(2);
-  assert(int_q.size() == 1);
-  assert(int_q.get() == 2);
-  int_q.pop();
-  assert(int_q.empty());
-  assert(int_q.size() == 0);
-  Queue<std::string> string_q;
-  assert(string_q.empty());
-  assert(string_q.size() == 0);
-  string_q.push("abc");
-  string_q.push("def");
-  string_q.push("efg");
-  assert(string_q.size() == 3);
-  assert(string_q.get() == "abc");
-  assert(string_q.pop() == "abc");
-  assert(string_q.size() == 2);
-  assert(string_q.pop() == "def");
-  assert(string_q.pop() == "efg");
-  assert(string_q.empty());
-
-  try {
-    string_q.get();
-    assert(false);
-  } catch (const std::runtime_error & e) {
-      std::cerr << "Caught: " << e.what() << '\n';
+  EXPECT_EQ(int_q.size(), 1);
+  EXPECT_EQ(int_q.get(), 2);
+  EXPECT_NO_THROW(int_q.pop());
+  EXPECT_TRUE(int_q.empty());
+  EXPECT_EQ(int_q.size(), 0);
+  EXPECT_ANY_THROW(int_q.get());
+  EXPECT_ANY_THROW(int_q.pop());
+  int_q.push(10);
+  int_q.push(322);
+  EXPECT_EQ(int_q.get(), 10);
+  EXPECT_EQ(int_q.size(), 2);
+  EXPECT_NO_THROW(int_q.pop());
+  EXPECT_NO_THROW(int_q.pop());
+  EXPECT_ANY_THROW(int_q.pop());
+  
+  for (int i = 0; i < 100000; i++) {
+    int_q.push(i);
   }
-
-  try {
-    string_q.pop();
-    assert(false);
-  } catch (const std::runtime_error & e) {
-    std::cerr << "Caught: " << e.what() << '\n';
-  }
-
-  std::cerr << "Tests passed!";
+  EXPECT_FALSE(int_q.empty());
+  EXPECT_EQ(int_q.size(), 100000);
 }
