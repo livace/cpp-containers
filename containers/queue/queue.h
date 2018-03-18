@@ -5,8 +5,8 @@
 #ifndef LIST_QUEUE_H
 #define LIST_QUEUE_H
 #include <memory>
-#include "container.h"
-#include "QueueNode.h"
+#include "../container.h"
+#include "queueNode.h"
 
 template <typename StoredType>
 class Queue : public Container<StoredType>{

@@ -4,7 +4,7 @@
 
 #include <cassert>
 #include "testQueue.h"
-#include "queue.h"
+#include "../containers/queue/queue.h"
 #include <string>
 #include <iostream>
 void testQueue::runTests() {
@@ -31,12 +31,14 @@ void testQueue::runTests() {
 
   try {
     string_q.get();
+    assert(false);
   } catch (const std::runtime_error & e) {
       std::cerr << "Caught: " << e.what() << '\n';
   }
 
   try {
     string_q.pop();
+    assert(false);
   } catch (const std::runtime_error & e) {
     std::cerr << "Caught: " << e.what() << '\n';
   }
