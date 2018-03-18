@@ -7,7 +7,7 @@
 
 class testQueue {
  public:
-  void runTests();
+  static void runTests();
 };
 
 #endif //LIST_TESTQUEUE_H

@@ -1,7 +1,6 @@
 #include "testQueue.h"
 
 int main() {
-  testQueue test;
-  test.runTests();
+  testQueue::runTests();
   return 0;
 }

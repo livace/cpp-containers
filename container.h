@@ -12,9 +12,9 @@ class Container {
   }
   virtual StoredType pop()= 0;
   virtual void push(const StoredType & value)= 0;
-  virtual int size()= 0;
-  virtual bool empty()= 0;
-  virtual StoredType get()= 0;
+  virtual int size() const = 0;
+  virtual bool empty() const = 0;
+  virtual StoredType get() const = 0;
   virtual ~Container<StoredType>()= default;
 };
 

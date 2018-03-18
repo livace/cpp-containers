@@ -28,5 +28,18 @@ void testQueue::runTests() {
   assert(string_q.pop() == "def");
   assert(string_q.pop() == "efg");
   assert(string_q.empty());
+
+  try {
+    string_q.get();
+  } catch (const std::runtime_error & e) {
+      std::cerr << "Caught: " << e.what() << '\n';
+  }
+
+  try {
+    string_q.pop();
+  } catch (const std::runtime_error & e) {
+    std::cerr << "Caught: " << e.what() << '\n';
+  }
+
   std::cerr << "Tests passed!";
 }

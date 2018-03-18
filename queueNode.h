@@ -12,12 +12,12 @@ class QueueNode {
 
   }
 
-  explicit QueueNode(StoredType value) {
-    next_ = std::shared_ptr<QueueNode>(nullptr);
+  explicit QueueNode<StoredType>(StoredType value) {
+    next_ = nullptr;
     value_ = value;
   }
 
-  StoredType Value() {
+  StoredType Value() const {
     return value_;
   }
 
@@ -29,7 +29,7 @@ class QueueNode {
     SetNext(new QueueNode(next));
   }
 
-  std::shared_ptr<QueueNode<StoredType>> GetNext() {
+  std::shared_ptr<QueueNode<StoredType>> GetNext() const {
     return next_;
   }
   ~QueueNode() {

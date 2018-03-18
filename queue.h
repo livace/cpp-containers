@@ -13,34 +13,45 @@ class Queue : public Container<StoredType>{
  public:
   Queue () {
     size_ = 0;
-    first_ = std::shared_ptr<QueueNode<StoredType>>(nullptr);
-    last_ = std::shared_ptr<QueueNode<StoredType>>(nullptr);
+    first_ = nullptr;
+    last_ = nullptr;
   }
 
   StoredType pop() override {
+    if (empty()) {
+      throw std::runtime_error("Trying to pop from empty queue");
+    }
     --size_;
     StoredType ans = first_->Value();
-    first_ = first_->GetNext();
+    if (empty()) {
+      first_ = nullptr;
+      last_ = nullptr;
+    } else {
+      first_ = first_->GetNext();
+    }
     return ans;
   }
 
   void push(const StoredType & value) override {
     ++size_;
-    if (!last_) {
-      first_ = std::shared_ptr<QueueNode<StoredType>>(new QueueNode<StoredType>(value));
+    if (size_ == 1) {
+      first_ = std::make_shared<QueueNode<StoredType>>(value);
       last_ = first_;
       return;
     }
     last_->SetNext(new QueueNode<StoredType>(value));
     last_ = last_->GetNext();
   }
-  int size() override {
+  int size() const override {
     return size_;
   }
-  bool empty() override {
+  bool empty() const override {
     return size_ == 0;
   }
-  StoredType get() override {
+  StoredType get() const override {
+    if (empty()) {
+      throw std::runtime_error("Trying to get element from empty queue");
+    }
     return first_->Value();
   }
   ~Queue () override {
